@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "lib/flatlaf-3.5.1-javadoc.jar",
+            "lib/miglayout-core-11.3-javadoc.jar",
+            "lib/miglayout-swing-11.3-javadoc.jar"
+        ]
+    }
+}
