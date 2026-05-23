@@ -2,10 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 public class Home {
     public static void main(String[] args) throws Exception {
@@ -33,7 +35,6 @@ public class Home {
 
         header_left.add(menu);
         header_left.add(search);
-
 
         JPanel header_right = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         header_right.setBackground(Color.decode("#E73331"));

@@ -1,12 +1,7 @@
 {
-    "java.project.referencedLibraries": {
-        "include": [
-            "lib/**/*.jar"
-        ],
-        "exclude": [
-            "lib/flatlaf-3.5.1-javadoc.jar",
-            "lib/miglayout-core-11.3-javadoc.jar",
-            "lib/miglayout-swing-11.3-javadoc.jar"
-        ]
-    }
+    "java.project.referencedLibraries": [
+        "/home/sergio/Uni/Asignaturas/SI/Dise-o-Aplicaci-n-Sistemas-Interactivos/lib/flatlaf-3.5.1.jar",
+        "/home/sergio/Uni/Asignaturas/SI/Dise-o-Aplicaci-n-Sistemas-Interactivos/lib/miglayout-core-11.3.jar",
+        "/home/sergio/Uni/Asignaturas/SI/Dise-o-Aplicaci-n-Sistemas-Interactivos/lib/miglayout-swing-11.3.jar"
+    ]
 }
