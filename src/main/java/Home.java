@@ -1,12 +1,13 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 
 public class Home {
@@ -20,38 +21,38 @@ public class Home {
         main_panel.setBackground(Color.decode("#F3EDDF"));
 
         // El navbar de arriba
-        JPanel header = new JPanel(new BorderLayout(5, 5));
+        JPanel header = new JPanel(new MigLayout("insets 20 20 5 15, fillx, gap 0", "[][grow][]", "[center]"));
         header.setPreferredSize(new Dimension(390, 85));
-        header.setBackground(Color.decode("#E73331")); 
+        header.setBackground(Color.decode("#E73331"));
 
-        // Para poner los botones que están a la izquierda y derecha
-        JPanel header_left = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        header_left.setBackground(Color.decode("#E73331"));
-
+        // Botón menú
         ImageIcon img_menu = new ImageIcon(Home.class.getResource("images/menu.png"));
         AppButton menu = new AppButton(img_menu, img_menu.getIconWidth(), img_menu.getIconHeight());
+
+        // Buscador (ocupa toda la columna central)
         ImageIcon img_search = new ImageIcon(Home.class.getResource("images/search_bar.png"));
         JLabel search = new JLabel(img_search);
 
-        header_left.add(menu);
-        header_left.add(search);
-
-        JPanel header_right = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        // Panel derecho con los 3 iconos juntos
+        JPanel header_right = new JPanel(new MigLayout("insets 0, gap 5", "[][][]", "[center]"));
         header_right.setBackground(Color.decode("#E73331"));
 
-        ImageIcon img_home = new ImageIcon(Home.class.getResource("images/home.png"));
-        AppButton home = new AppButton(img_home, img_home.getIconWidth(), img_home.getIconHeight());
+        ImageIcon img_home   = new ImageIcon(Home.class.getResource("images/home.png"));
         ImageIcon img_tomato = new ImageIcon(Home.class.getResource("images/tomato.png"));
-        AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
         ImageIcon img_basket = new ImageIcon(Home.class.getResource("images/basket.png"));
+
+        AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
+        AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
         AppButton basket = new AppButton(img_basket, img_basket.getIconWidth(), img_basket.getIconHeight());
 
         header_right.add(home);
         header_right.add(tomato);
         header_right.add(basket);
 
-        header.add(header_left, BorderLayout.WEST);
-        header.add(header_right, BorderLayout.EAST);
+        // Añadir al header
+        header.add(menu,         "");
+        header.add(search,       "growx, gapright 0");   // se estira para ocupar el centro
+        header.add(header_right, "");
 
         main_panel.add(header, BorderLayout.NORTH);
 

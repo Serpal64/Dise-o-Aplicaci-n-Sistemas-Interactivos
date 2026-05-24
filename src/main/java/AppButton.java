@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.Insets;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -12,6 +14,7 @@ public class AppButton extends JButton{
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusPainted(false);
+        setMargin(new Insets(0, 0, 0, 0));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
     }

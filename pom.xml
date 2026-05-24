@@ -11,16 +11,21 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout-swing</artifactId>
-            <version>11.3</version>
-        </dependency>
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf</artifactId>
+        <version>3.5.1</version>
+    </dependency>
+    <dependency>
+        <groupId>com.miglayout</groupId>
+        <artifactId>miglayout-swing</artifactId>
+        <version>11.3</version>
+    </dependency>
+    <dependency>
+        <groupId>com.miglayout</groupId>
+        <artifactId>miglayout-core</artifactId>
+        <version>11.3</version>
+    </dependency>
     </dependencies>
 
     <properties>
