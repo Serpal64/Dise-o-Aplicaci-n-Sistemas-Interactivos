@@ -22,7 +22,7 @@ public class ChangeLanguage implements ActionListener{
         this.locales = new Locale[]{new Locale("es", "ES"), new Locale("en", "GB")};
         this.components = new ArrayList<>();
         this.keys = new ArrayList<>();
-        this.currentLocaleIndex = 0;
+        this.currentLocaleIndex = 1;        // Idioma por defecto en español
 
     }
 
@@ -48,6 +48,12 @@ public class ChangeLanguage implements ActionListener{
             }
             else if(components.get(i) instanceof JMenuItem jMItem){
                 jMItem.setText(bundle_text.getString(keys.get(i)));
+
+                // if("Idioma".equals(keys.get(i))){
+                //     System.out.println("images/header_menu/" + nextLocale.getLanguage() + ".png");
+                //     ImageIcon img_lang = new ImageIcon(ChangeLanguage.class.getResource("/images/header/" + nextLocale.getLanguage() + ".png"));
+                //     jMItem.setIcon(img_lang);
+                // }
             }
 
         }
