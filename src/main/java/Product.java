@@ -24,6 +24,8 @@ public class Product extends JPanel{
     
     public Product(String nombre, ImageIcon imagen, String descripcion, float precio){
 
+        ChangeLanguage language_changer = ChangeLanguage.getInstance();
+
         setLayout(new BorderLayout());
         setBackground(Color.decode("#F5F0E8"));
 
@@ -50,6 +52,8 @@ public class Product extends JPanel{
         titulo.setOpaque(true);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
 
+        language_changer.addComponent(titulo, nombre);
+
         contenido.add(titulo);
         // Imagen del producto
         Image imgEscalada = imagen.getImage().getScaledInstance(220, 180, Image.SCALE_SMOOTH);
@@ -73,6 +77,8 @@ public class Product extends JPanel{
         descripcion_text_area.setFont(new Font("Fraunces", Font.PLAIN, 16));
         descripcion_text_area.setForeground(Color.decode("#583E35"));
 
+        language_changer.addComponent(descripcion_text_area, descripcion);
+
         // Centrar el texto
         StyledDocument doc = descripcion_text_area.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
@@ -94,6 +100,8 @@ public class Product extends JPanel{
         JLabel lblCantidad = new JLabel("Cantidad");
         lblCantidad.setFont(new Font("Fraunces", Font.PLAIN, 13));
 
+        language_changer.addComponent(lblCantidad, "Cantidad");
+
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
         spinner.setPreferredSize(new Dimension(70, 35));
 
@@ -104,6 +112,8 @@ public class Product extends JPanel{
 
         AppButton btnAnadir = new AppButton("Añadir a la cesta", "#E73331", "#FFFFFF");
         btnAnadir.setPreferredSize(new Dimension(136, 40));
+
+        language_changer.addComponent(btnAnadir, "BotonAnadir");
 
         acciones.add(lblCantidad, "align left");  // cantidad encima del spinner
         acciones.add(precio_label, "align right, wrap");
@@ -123,6 +133,7 @@ public class Product extends JPanel{
         scroll.setAutoscrolls(true);
 
         add(scroll, BorderLayout.CENTER);
+
     }
 
 }

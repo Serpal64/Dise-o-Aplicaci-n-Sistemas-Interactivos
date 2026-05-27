@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JTextPane;
 
 public class ChangeLanguage implements ActionListener{
 
+    private static ChangeLanguage instance;
     private final Locale[] locales;
     private int currentLocaleIndex;
     private final List<JComponent> components;
@@ -22,8 +24,13 @@ public class ChangeLanguage implements ActionListener{
         this.locales = new Locale[]{new Locale("es", "ES"), new Locale("en", "GB")};
         this.components = new ArrayList<>();
         this.keys = new ArrayList<>();
-        this.currentLocaleIndex = 1;        // Idioma por defecto en español
+        this.currentLocaleIndex = 0;        // Idioma por defecto en español
 
+    }
+
+    public static ChangeLanguage getInstance() {
+        if (instance == null) instance = new ChangeLanguage();
+        return instance;
     }
 
     public void addComponent(JComponent comp, String key){
@@ -54,6 +61,9 @@ public class ChangeLanguage implements ActionListener{
                 //     ImageIcon img_lang = new ImageIcon(ChangeLanguage.class.getResource("/images/header/" + nextLocale.getLanguage() + ".png"));
                 //     jMItem.setIcon(img_lang);
                 // }
+            }
+            else if(components.get(i) instanceof JTextPane jTextPane){
+                jTextPane.setText(bundle_text.getString(keys.get(i)));
             }
 
         }

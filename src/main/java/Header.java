@@ -15,9 +15,8 @@ public class Header extends JPanel{
     
     public Header(){
 
-        
         // Para cambiar el idioma
-        ChangeLanguage language_changer = new ChangeLanguage();
+        ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
         // El navbar de arriba
         setLayout(new MigLayout("insets 20 20 5 15, fillx, gap 0", "[][grow][]", "[center]"));
@@ -30,11 +29,11 @@ public class Header extends JPanel{
 
         JPopupMenu popupMenu = new JPopupMenu();
 
-        JMenuItem contact = new JMenuItem();
+        JMenuItem contact = new JMenuItem("Contacto");
         language_changer.addComponent(contact, "Contacto");
 
         // Este menú cambia el idioma
-        JMenuItem language = new JMenuItem();
+        JMenuItem language = new JMenuItem("Idioma");
         language_changer.addComponent(language, "Idioma");
         language.addActionListener(e -> language_changer.actionPerformed(e));
 
