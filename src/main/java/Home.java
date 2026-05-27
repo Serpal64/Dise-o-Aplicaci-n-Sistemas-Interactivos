@@ -23,7 +23,7 @@ public class Home {
         UIManager.put("MenuItem.font",              new Font("Fraunces", Font.PLAIN, 16));
         UIManager.put("PopupMenu.background",       Color.decode("#E73331"));
 
-        
+
         JFrame jf = new JFrame("Home");
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
@@ -36,7 +36,7 @@ public class Home {
         Header header = new Header();
         main_panel.add(header, BorderLayout.NORTH);
 
-        main_panel.add(new Product("Producto1", new ImageIcon(Home.class.getResource("images/product/tomate_1.png")), "Descripcion1", (float)1.75), BorderLayout.CENTER);
+        main_panel.add(new Product(new ProductDetails("Producto1", new ImageIcon(Home.class.getResource("images/product/Producto1.png")), "Descripcion1", (float)1.75)), BorderLayout.CENTER);
 
         jf.add(main_panel);
         jf.setSize(390, 844);

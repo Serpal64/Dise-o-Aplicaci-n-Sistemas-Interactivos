@@ -22,7 +22,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class Product extends JPanel{
     
-    public Product(String nombre, ImageIcon imagen, String descripcion, float precio){
+    public Product(ProductDetails product){
 
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
@@ -44,19 +44,19 @@ public class Product extends JPanel{
         ));
         zonaRoja.setBackground(Color.decode("#E73331"));
 
-        JLabel titulo = new JLabel(nombre);
+        JLabel titulo = new JLabel(product.getNombre());
         titulo.setFont(new Font("Fraunces", Font.PLAIN, 36));
         titulo.setForeground(Color.decode("#E73331"));
         titulo.setBackground(Color.decode("#F5F0E8"));
         titulo.setOpaque(true);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
 
-        language_changer.addComponent(titulo, nombre);
+        language_changer.addComponent(titulo, product.getNombre());
 
         contenido.add(titulo);
 
 
-        Image imgEscalada = imagen.getImage().getScaledInstance(220, 180, Image.SCALE_SMOOTH);
+        Image imgEscalada = product.getImagen().getImage().getScaledInstance(220, 180, Image.SCALE_SMOOTH);
         JLabel imagen_label = new JLabel(new ImageIcon(imgEscalada));
 
         zonaRoja.add(imagen_label, "");
@@ -76,7 +76,7 @@ public class Product extends JPanel{
         descripcion_text_area.setFont(new Font("Fraunces", Font.PLAIN, 16));
         descripcion_text_area.setForeground(Color.decode("#583E35"));
 
-        language_changer.addComponent(descripcion_text_area, descripcion);
+        language_changer.addComponent(descripcion_text_area, product.getDescripcion());
 
         // Centrar el texto como en el word
         StyledDocument doc = descripcion_text_area.getStyledDocument();
@@ -84,7 +84,7 @@ public class Product extends JPanel{
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        descripcion_text_area.setText(descripcion);
+        descripcion_text_area.setText(product.getDescripcion());
         descripcion_text_area.setFocusable(false);
         descripcion_text_area.setPreferredSize(new Dimension(290, 168));
 
@@ -104,7 +104,7 @@ public class Product extends JPanel{
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
         spinner.setPreferredSize(new Dimension(70, 35));
 
-        JLabel precio_label = new JLabel(precio + " €/kg");
+        JLabel precio_label = new JLabel(product.getPrecio() + " €/kg");
         precio_label.setHorizontalTextPosition(SwingConstants.CENTER);
         precio_label.setPreferredSize(new Dimension(100, 22));
         precio_label.setFont(new Font("Fraunces", Font.PLAIN, 14));
