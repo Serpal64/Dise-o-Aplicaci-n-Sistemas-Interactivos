@@ -33,9 +33,10 @@ public class AppButton extends JButton{
     public AppButton(String txt, String back_color, String font_color){
 
         super(txt);
-        removeStyle();
         setBackground(Color.decode(back_color));
         setForeground(Color.decode(font_color));
+        setFocusPainted(false);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
 
     }
 
