@@ -1,15 +1,29 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 
 public class Home {
     public static void main(String[] args) throws Exception {
 
+        FlatLightLaf.setup();
+        UIManager.put("Button.arc", 20);
+        UIManager.put("MenuItem.background",        Color.decode("#E73331"));
+        UIManager.put("MenuItem.foreground",        Color.WHITE);
+        UIManager.put("MenuItem.selectionBackground", Color.decode("#C42020")); // hover
+        UIManager.put("MenuItem.selectionForeground", Color.WHITE);
+        UIManager.put("MenuItem.font",              new Font("Fraunces", Font.PLAIN, 16));
+        UIManager.put("PopupMenu.background",       Color.decode("#E73331"));
+
+        
         JFrame jf = new JFrame("Home");
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 

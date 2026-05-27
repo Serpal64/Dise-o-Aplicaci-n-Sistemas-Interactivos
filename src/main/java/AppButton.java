@@ -37,6 +37,7 @@ public class AppButton extends JButton{
         setForeground(Color.decode(font_color));
         setFocusPainted(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
+        putClientProperty("JButton.buttonType", "roundRect");
 
     }
 
