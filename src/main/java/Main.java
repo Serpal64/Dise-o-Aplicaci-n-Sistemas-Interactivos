@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -11,7 +10,7 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatLightLaf;
 
 
-public class Home {
+public class Main {
     public static void main(String[] args) throws Exception {
 
         FlatLightLaf.setup();
@@ -36,7 +35,9 @@ public class Home {
         Header header = new Header();
         main_panel.add(header, BorderLayout.NORTH);
 
-        main_panel.add(new Product(new ProductDetails("Producto1", new ImageIcon(Home.class.getResource("images/product/Producto1.png")), "Descripcion1", (float)1.75)), BorderLayout.CENTER);
+        // main_panel.add(new Product(new ProductDetails("Producto1", new ImageIcon(Main.class.getResource("images/product/Producto1.png")), "Descripcion1", (float)1.75)), BorderLayout.CENTER);
+
+        main_panel.add(new Products(3));
 
         jf.add(main_panel);
         jf.setSize(390, 844);

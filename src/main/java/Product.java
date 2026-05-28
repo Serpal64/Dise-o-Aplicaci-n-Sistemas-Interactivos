@@ -29,12 +29,12 @@ public class Product extends JPanel{
         setLayout(new BorderLayout());
         setBackground(Color.decode("#F5F0E8"));
 
-        JPanel contenido = new JPanel(new MigLayout(
+        JPanel main_panel = new JPanel(new MigLayout(
             "insets 0, fillx, wrap 1",
             "[grow, center]", // Una columna
             "15[]15[]20[]20[]" // 4 filas en total con espacios entre ellas
         ));
-        contenido.setBackground(Color.decode("#F5F0E8"));
+        main_panel.setBackground(Color.decode("#F5F0E8"));
 
 
         JPanel zonaRoja = new JPanel(new MigLayout(
@@ -53,7 +53,7 @@ public class Product extends JPanel{
 
         language_changer.addComponent(titulo, product.getNombre());
 
-        contenido.add(titulo);
+        main_panel.add(titulo);
 
 
         Image imgEscalada = product.getImagen().getImage().getScaledInstance(220, 180, Image.SCALE_SMOOTH);
@@ -122,11 +122,11 @@ public class Product extends JPanel{
         zonaBeige.add(descripcion_text_area, "");
         zonaBeige.add(acciones,    "");
 
-        contenido.add(zonaRoja,   "growx");
-        contenido.add(zonaBeige,  "growx");
+        main_panel.add(zonaRoja,   "growx");
+        main_panel.add(zonaBeige,  "growx");
 
-        // Scroll por si el contenido no cabe
-        JScrollPane scroll = new JScrollPane(contenido);
+        // Scroll por si el main_panel no cabe
+        JScrollPane scroll = new JScrollPane(main_panel);
         scroll.setBorder(BorderFactory.createEmptyBorder()); // Quita el borde feo
         scroll.getVerticalScrollBar().setUnitIncrement(10);
         scroll.setAutoscrolls(true);
