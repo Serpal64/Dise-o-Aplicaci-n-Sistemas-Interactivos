@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -22,11 +21,13 @@ public class Products extends JPanel{
 
     private final CardLayout cardLayout;
     private final JPanel content;
+    private final List<ProductDetails> products;
     
-    public Products(int num_products, CardLayout cardLayout, JPanel content){
+    public Products(int num_products, CardLayout cardLayout, JPanel content, List<ProductDetails> products){
 
         this.cardLayout = cardLayout;
         this.content = content;
+        this.products = products;
 
         ChangeLanguage language_manager = ChangeLanguage.getInstance();
 
@@ -48,13 +49,6 @@ public class Products extends JPanel{
         productos_label.setBackground(Color.decode("#F3EDDF"));
         language_manager.addComponent(productos_label, "Productos");
 
-        // Lista con los datos de los productos
-        List<ProductDetails> productos = new ArrayList<>();
-
-        for(int i=1; i<=num_products; i++){
-            productos.add(new ProductDetails("Producto" + i, new ImageIcon(Main.class.getResource("images/product/Producto" + i + ".png")), "Descripcion" + i, (float)1.75));
-        }
-
         // Panel de abajo para ir añadiendo los productos
         JPanel productos_panel = new JPanel(new MigLayout(
             "insets 0, fillx, wrap 1, gapy 40",
@@ -63,12 +57,12 @@ public class Products extends JPanel{
         productos_panel.setBackground(Color.decode("#F3EDDF"));
 
         
-        for(ProductDetails p: productos){
+        for(ProductDetails p: products){
 
             RoundedPanel panel_aux = new RoundedPanel(20);
             panel_aux.setLayout(new MigLayout(
                 "insets 20, fillx",
-                "[grow]50[grow]",
+                "[grow][grow]",
                 "[center]"
             ));
             panel_aux.setPreferredSize(new Dimension(350, 175));
@@ -76,8 +70,6 @@ public class Products extends JPanel{
             panel_aux.addMouseListener(new MouseAdapter(){
                 @Override
                 public void mouseClicked(MouseEvent e){
-                    Product pr = new Product(p, cardLayout, content);
-                    content.add(pr, p.getNombre());
                     cardLayout.show(content, p.getNombre());
                 }
             });

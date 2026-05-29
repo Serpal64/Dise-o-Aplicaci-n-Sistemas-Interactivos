@@ -3,7 +3,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -39,7 +42,16 @@ public class Main {
         Header header = new Header(cardLayout, content);
         main_panel.add(header, BorderLayout.NORTH);
 
-        content.add(new Products(3, cardLayout, content), "productos");
+        // Lista con los datos de los productos que vamos a utilizar
+        List<ProductDetails> productos = new ArrayList<>();
+
+        for(int i=1; i<=3; i++){
+            productos.add(new ProductDetails("Producto" + i, new ImageIcon(Main.class.getResource("images/product/Producto" + i + ".png")), "Descripcion" + i, (float)1.75));
+            content.add(new Product(productos.get(i-1), cardLayout, content), "Producto" + i);
+        }
+
+        // Añadimos todas las ventanas al cardLayout y cuando queramos cambiar de ventana hacemos un .show
+        content.add(new Products(3, cardLayout, content, productos), "productos");
         content.add(ShoppingCartPanel.getInstance(cardLayout, content), "carrito");
         
         cardLayout.show(content, "productos");
@@ -53,6 +65,7 @@ public class Main {
         jf.setVisible(true);    
 
         // Para inicializar los textos 
+        language_changer.printComponents();
         language_changer.actionPerformed(new ActionEvent(main_panel, 0, null));
 
     }

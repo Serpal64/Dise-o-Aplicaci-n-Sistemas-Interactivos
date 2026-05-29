@@ -96,7 +96,7 @@ public class ShoppingCartPanel extends JPanel {
         else{
 
             main_panel.setLayout(new MigLayout(
-                "insets 25, fillx, wrap 1, gapy 30",
+                "insets 35, fillx, wrap 1, gapy 30",
                 "[center, grow]",
                 "[center]15[]"
             ));
@@ -143,12 +143,13 @@ public class ShoppingCartPanel extends JPanel {
                 spinner.addChangeListener(e -> {
                     cart.addProduct(p, (int)spinner.getValue());
                     refresh();
+                    language_manager.printComponents();
                 });
 
                 derecho.add(precio, "");
                 derecho.add(spinner, "growx");
 
-                fila.add(nombre,  "span 2, wrap");   // nombre ocupa 2 columnas
+                fila.add(nombre,  "span 2, wrap");   // span para que ocupe 2 columnas
                 fila.add(imagen,  "");
                 fila.add(derecho, "");
 

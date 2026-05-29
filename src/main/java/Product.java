@@ -101,7 +101,7 @@ public class Product extends JPanel{
         JPanel acciones = new JPanel(new MigLayout(
             "insets 0, fillx",
             "[grow]50[grow]",
-            "[]5[]"
+            "[]5[]10[]"
         ));
         acciones.setBackground(Color.decode("#F3EDDF"));
 
@@ -116,6 +116,8 @@ public class Product extends JPanel{
         spinner.setPreferredSize(new Dimension(70, 35));
 
         JLabel precio_label = new JLabel(product.getPrecio() + " €/kg");
+        precio_label.setForeground(Color.decode("#583E35"));
+        precio_label.setBackground(Color.decode("#F3EDDF"));
         precio_label.setHorizontalTextPosition(SwingConstants.CENTER);
         precio_label.setPreferredSize(new Dimension(100, 22));
         precio_label.setFont(new Font("Fraunces", Font.PLAIN, 14));
@@ -127,6 +129,7 @@ public class Product extends JPanel{
             // Añadimos al carrito el producto y la cantidad
             cart.addProduct(product, (Integer)spinner.getValue());
             cart_panel.refresh();
+
 
         });
 
