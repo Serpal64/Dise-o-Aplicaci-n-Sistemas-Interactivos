@@ -31,7 +31,7 @@ public class Products extends JPanel{
         ChangeLanguage language_manager = ChangeLanguage.getInstance();
 
         setLayout(new BorderLayout());
-        setBackground(Color.decode("#F5F0E8"));
+        setBackground(Color.decode("#F3EDDF"));
 
         // Panel principal
         JPanel main_panel = new JPanel(new MigLayout(
@@ -39,13 +39,13 @@ public class Products extends JPanel{
             "[grow, center]",
             "20[]20[]"
         ));
-        main_panel.setBackground(Color.decode("#F5F0E8"));
+        main_panel.setBackground(Color.decode("#F3EDDF"));
 
         // Etiqueta que ponga productos
         JLabel productos_label = new JLabel("Productos");
         productos_label.setFont(new Font("Fraunces", Font.PLAIN, 20));
         productos_label.setForeground(Color.decode("#E73331"));
-        productos_label.setBackground(Color.decode("#F5F0E8"));
+        productos_label.setBackground(Color.decode("#F3EDDF"));
         language_manager.addComponent(productos_label, "Productos");
 
         // Lista con los datos de los productos
@@ -60,7 +60,7 @@ public class Products extends JPanel{
             "insets 0, fillx, wrap 1, gapy 40",
             "[grow]"
         ));
-        productos_panel.setBackground(Color.decode("#F5F0E8"));
+        productos_panel.setBackground(Color.decode("#F3EDDF"));
 
         
         for(ProductDetails p: productos){

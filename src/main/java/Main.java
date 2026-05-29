@@ -40,6 +40,7 @@ public class Main {
         main_panel.add(header, BorderLayout.NORTH);
 
         content.add(new Products(3, cardLayout, content), "productos");
+        content.add(new ShoppingCartPanel(cardLayout, content), "carrito");
         
         cardLayout.show(content, "productos");
 

@@ -28,6 +28,20 @@ public class ShoppingCart {
 
     }
 
+    public float getTotalPrice(){
+
+        float sum=0;
+
+        for(int i=0; i<lista_productos.size(); i++){
+
+            sum += lista_productos.get(i).getPrecio() * cantidades.get(i);
+
+        }
+
+        return sum;
+
+    }
+
     public void buyProducts(){
         lista_productos = new ArrayList<>();
         cantidades = new ArrayList<>();

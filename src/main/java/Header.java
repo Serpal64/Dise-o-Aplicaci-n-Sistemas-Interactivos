@@ -69,6 +69,9 @@ public class Header extends JPanel{
             cardLayout.show(content, "productos");
         });
         AppButton basket = new AppButton(img_basket, img_basket.getIconWidth(), img_basket.getIconHeight());
+        basket.addActionListener(e -> {
+            cardLayout.show(content, "carrito");
+        });
 
         header_right.add(home);
         header_right.add(tomato);

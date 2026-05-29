@@ -34,14 +34,14 @@ public class Product extends JPanel{
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
         setLayout(new BorderLayout());
-        setBackground(Color.decode("#F5F0E8"));
+        setBackground(Color.decode("#F3EDDF"));
 
         JPanel main_panel = new JPanel(new MigLayout(
             "insets 0, fillx, wrap 1",
             "[grow, center]", // Una columna
             "15[]15[]20[]20[]" // 4 filas en total con espacios entre ellas
         ));
-        main_panel.setBackground(Color.decode("#F5F0E8"));
+        main_panel.setBackground(Color.decode("#F3EDDF"));
 
 
         JPanel zonaRoja = new JPanel(new MigLayout(
@@ -54,7 +54,7 @@ public class Product extends JPanel{
         JLabel titulo = new JLabel(product.getNombre());
         titulo.setFont(new Font("Fraunces", Font.PLAIN, 36));
         titulo.setForeground(Color.decode("#E73331"));
-        titulo.setBackground(Color.decode("#F5F0E8"));
+        titulo.setBackground(Color.decode("#F3EDDF"));
         titulo.setOpaque(true);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -74,12 +74,12 @@ public class Product extends JPanel{
             "[grow, center]",
             "[]50[]"
         ));
-        zonaBeige.setBackground(Color.decode("#F5F0E8"));
+        zonaBeige.setBackground(Color.decode("#F3EDDF"));
 
 
         JTextPane descripcion_text_area = new JTextPane();
         descripcion_text_area.setEditable(false);
-        descripcion_text_area.setBackground(Color.decode("#F5F0E8"));
+        descripcion_text_area.setBackground(Color.decode("#F3EDDF"));
         descripcion_text_area.setFont(new Font("Fraunces", Font.PLAIN, 16));
         descripcion_text_area.setForeground(Color.decode("#583E35"));
 
@@ -101,7 +101,7 @@ public class Product extends JPanel{
             "[grow]50[grow]",
             "[]5[]"
         ));
-        acciones.setBackground(Color.decode("#F5F0E8"));
+        acciones.setBackground(Color.decode("#F3EDDF"));
 
         JLabel cantidad_label = new JLabel("Cantidad");
         cantidad_label.setFont(new Font("Fraunces", Font.PLAIN, 13));
