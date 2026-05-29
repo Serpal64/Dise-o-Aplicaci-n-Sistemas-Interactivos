@@ -1,7 +1,7 @@
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,7 +13,13 @@ import net.miginfocom.swing.MigLayout;
 
 public class Header extends JPanel{
     
-    public Header(){
+    private final CardLayout cardLayout;
+    private final JPanel content;
+
+    public Header(CardLayout cardLayout, JPanel content){
+
+        this.cardLayout = cardLayout;
+        this.content = content;
 
         // Para cambiar el idioma
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
@@ -59,6 +65,9 @@ public class Header extends JPanel{
 
         AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
         AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
+        tomato.addActionListener(e -> {
+            cardLayout.show(content, "productos");
+        });
         AppButton basket = new AppButton(img_basket, img_basket.getIconWidth(), img_basket.getIconHeight());
 
         header_right.add(home);
@@ -69,8 +78,6 @@ public class Header extends JPanel{
         add(search,       "growx, gapright 0");   // se estira para ocupar el centro
         add(header_right, "");
 
-        // Para inicializar los idiomas
-        language_changer.actionPerformed(new ActionEvent(basket, 0, null));
     }
 
 }

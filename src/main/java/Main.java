@@ -32,12 +32,12 @@ public class Main {
         JPanel main_panel = new JPanel(bl);
         main_panel.setBackground(Color.decode("#F3EDDF"));
 
-        Header header = new Header();
-        main_panel.add(header, BorderLayout.NORTH);
-
         // Panel donde se irán cambiando el contenido porque el header se queda igual
         CardLayout cardLayout = new CardLayout();
         JPanel content = new JPanel(cardLayout);
+
+        Header header = new Header(cardLayout, content);
+        main_panel.add(header, BorderLayout.NORTH);
 
         content.add(new Products(3, cardLayout, content), "productos");
         

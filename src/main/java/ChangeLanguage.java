@@ -24,7 +24,7 @@ public class ChangeLanguage implements ActionListener{
         this.locales = new Locale[]{new Locale("es", "ES"), new Locale("en", "GB")};
         this.components = new ArrayList<>();
         this.keys = new ArrayList<>();
-        this.currentLocaleIndex = 0;        // Idioma por defecto en español
+        this.currentLocaleIndex = 1;        // Idioma por defecto en español
 
     }
 
@@ -36,6 +36,24 @@ public class ChangeLanguage implements ActionListener{
     public void addComponent(JComponent comp, String key){
         components.add(comp);
         keys.add(key);
+
+        // Inicializar el texto
+        Locale locale = locales[currentLocaleIndex];
+        ResourceBundle bundle_text = ResourceBundle.getBundle("bundle.Bundle", locale);
+
+        if(comp instanceof JLabel jLabel){
+            jLabel.setText(bundle_text.getString(key));
+        }
+        else if(comp instanceof JButton jButton) {
+            jButton.setText(bundle_text.getString(key));
+        }
+        else if(comp instanceof JMenuItem jMItem){
+            jMItem.setText(bundle_text.getString(key));
+
+        }
+        else if(comp instanceof JTextPane jTextPane){
+            jTextPane.setText(bundle_text.getString(key));
+        }
     }
 
     @Override
