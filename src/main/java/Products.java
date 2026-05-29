@@ -1,8 +1,12 @@
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +19,14 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 
 public class Products extends JPanel{
+
+    private final CardLayout cardLayout;
+    private final JPanel content;
     
-    public Products(int num_products){
+    public Products(int num_products, CardLayout cardLayout, JPanel content){
+
+        this.cardLayout = cardLayout;
+        this.content = content;
 
         ChangeLanguage language_manager = ChangeLanguage.getInstance();
 
@@ -63,6 +73,15 @@ public class Products extends JPanel{
             ));
             panel_aux.setPreferredSize(new Dimension(350, 175));
             panel_aux.setBackground(Color.decode("#E73331"));
+            panel_aux.addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    Product pr = new Product(p, cardLayout, content);
+                    content.add(pr, p.getNombre());
+                    cardLayout.show(content, p.getNombre());
+                }
+            });
+            panel_aux.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             // Imagen del producto
             Image img_escalada = p.getImagen().getImage().getScaledInstance(155, 135, Image.SCALE_SMOOTH);

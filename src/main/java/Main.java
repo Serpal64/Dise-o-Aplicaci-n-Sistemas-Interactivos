@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,6 @@ public class Main {
         UIManager.put("MenuItem.font",              new Font("Fraunces", Font.PLAIN, 16));
         UIManager.put("PopupMenu.background",       Color.decode("#E73331"));
 
-
         JFrame jf = new JFrame("Home");
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
@@ -35,9 +35,15 @@ public class Main {
         Header header = new Header();
         main_panel.add(header, BorderLayout.NORTH);
 
-        // main_panel.add(new Product(new ProductDetails("Producto1", new ImageIcon(Main.class.getResource("images/product/Producto1.png")), "Descripcion1", (float)1.75)), BorderLayout.CENTER);
+        // Panel donde se irán cambiando el contenido porque el header se queda igual
+        CardLayout cardLayout = new CardLayout();
+        JPanel content = new JPanel(cardLayout);
 
-        main_panel.add(new Products(3));
+        content.add(new Products(3, cardLayout, content), "productos");
+        
+        cardLayout.show(content, "productos");
+
+        main_panel.add(content, BorderLayout.CENTER);
 
         jf.add(main_panel);
         jf.setSize(390, 844);

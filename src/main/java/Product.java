@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -21,8 +22,14 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 
 public class Product extends JPanel{
+
+    private final CardLayout cardLayout;
+    private final JPanel content;
     
-    public Product(ProductDetails product){
+    public Product(ProductDetails product, CardLayout cardLayout, JPanel content){
+
+        this.cardLayout = cardLayout;
+        this.content = content;
 
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
