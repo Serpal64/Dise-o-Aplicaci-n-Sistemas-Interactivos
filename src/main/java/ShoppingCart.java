@@ -23,9 +23,33 @@ public class ShoppingCart {
 
     public void addProduct(ProductDetails producto, Integer cantidad){
 
-        lista_productos.add(producto);
-        cantidades.add(cantidad);
+        boolean new_product = true;
 
+        for(int i=0; i<lista_productos.size(); i++){
+
+            if(producto.getNombre().equals(lista_productos.get(i).getNombre())){
+                
+                cantidades.set(i, cantidad);
+                new_product = false;
+                break;
+
+            }
+
+        }
+
+        if(new_product == true){
+            lista_productos.add(producto);
+            cantidades.add(cantidad);
+        }
+
+    }
+
+    public List<ProductDetails> getProducts(){
+        return lista_productos;
+    }
+
+    public List<Integer> getAmounts(){
+        return cantidades;
     }
 
     public float getTotalPrice(){

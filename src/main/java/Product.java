@@ -32,6 +32,8 @@ public class Product extends JPanel{
         this.content = content;
 
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
+        ShoppingCart cart = ShoppingCart.getInstance();
+        ShoppingCartPanel cart_panel = ShoppingCartPanel.getInstance(cardLayout, content);
 
         setLayout(new BorderLayout());
         setBackground(Color.decode("#F3EDDF"));
@@ -109,6 +111,8 @@ public class Product extends JPanel{
         language_changer.addComponent(cantidad_label, "Cantidad");
 
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        // Para que no se pueda escribir texto en el spinner
+        ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
         spinner.setPreferredSize(new Dimension(70, 35));
 
         JLabel precio_label = new JLabel(product.getPrecio() + " €/kg");
@@ -118,6 +122,13 @@ public class Product extends JPanel{
 
         AppButton boton_anadir = new AppButton("Añadir a la cesta", "#E73331", "#FFFFFF");
         boton_anadir.setPreferredSize(new Dimension(136, 40));
+        boton_anadir.addActionListener(e -> {
+
+            // Añadimos al carrito el producto y la cantidad
+            cart.addProduct(product, (Integer)spinner.getValue());
+            cart_panel.refresh();
+
+        });
 
         language_changer.addComponent(boton_anadir, "BotonAnadir");
 
