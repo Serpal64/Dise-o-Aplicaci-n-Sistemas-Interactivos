@@ -14,11 +14,8 @@ import javax.swing.border.EmptyBorder;
 public class FormError extends JPanel {
     
     private JButton btnReintentar;
-    private String errorMessage;
     
-    public FormError(String errorMessage) {
-        this.errorMessage = errorMessage;
-        
+    public FormError(String errorMessage, NavigationListener navigator) {
         setBackground(Color.decode("#F5F5F0"));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -68,15 +65,12 @@ public class FormError extends JPanel {
         btnReintentar.setPreferredSize(new Dimension(140, 35));
         btnReintentar.setMaximumSize(new Dimension(140, 35));
         btnReintentar.setAlignmentX(CENTER_ALIGNMENT);
+        btnReintentar.addActionListener(e -> navigator.goToContact());
         add(btnReintentar);
         
         add(Box.createVerticalStrut(10));
         
         setPreferredSize(new Dimension(350, 300));
-    }
-    
-    public void setReintentarListener(ActionListener listener) {
-        btnReintentar.addActionListener(listener);
     }
 }
 

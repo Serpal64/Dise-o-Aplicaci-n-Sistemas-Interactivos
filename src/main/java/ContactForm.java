@@ -25,9 +25,10 @@ public class ContactForm extends JPanel {
     private JTextField txtDireccion;
     private JTextArea txtMensaje;
     private JButton btnEnviar;
-    private ActionListener enviarListener;
+    private NavigationListener navigator;
     
-    public ContactForm() {
+    public ContactForm(NavigationListener navigator) {
+        this.navigator = navigator;
         setBackground(Color.decode("#E73331"));
         setLayout(new MigLayout("insets 20, gap 15", "[grow]", ""));
         setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -110,6 +111,7 @@ public class ContactForm extends JPanel {
         btnEnviar.setFocusPainted(false);
         btnEnviar.setBorderPainted(false);
         btnEnviar.setPreferredSize(new Dimension(150, 35));
+        btnEnviar.addActionListener(e -> enviarFormulario());
         add(btnEnviar, "width 150!");
         
         setPreferredSize(new Dimension(350, 600));
@@ -160,7 +162,18 @@ public class ContactForm extends JPanel {
     }
     
     public void setEnviarListener(ActionListener listener) {
-        this.enviarListener = listener;
         btnEnviar.addActionListener(listener);
+    }
+    
+    public void enviarFormulario() {
+        FormValidator.ValidationResult validation = 
+            FormValidator.validateForm(getNombre(), getCorreo(), getDireccion(), getMensaje());
+        
+        if (validation.isValid) {
+            limpiarFormulario();
+            navigator.showFormCorrect();
+        } else {
+            navigator.showFormError(validation.errorMessage);
+        }
     }
 }

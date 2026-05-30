@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +22,8 @@ public class ProductCarousel extends JPanel {
     private int currentIndex = 0;
     private ImageIcon[] images;
     private JLabel imageLabel;
+    private int lastWidth = -1;
+    private int lastHeight = -1;
     
     public ProductCarousel(ImageIcon[] imagenes) {
         
@@ -27,12 +31,13 @@ public class ProductCarousel extends JPanel {
         
         setLayout(new MigLayout(
             "insets 0, gap 0, fillx, filly",
-            "[22!][grow][22!]",
+            "[40!][grow][40!]",
             "[grow]"
         ));
         
         setBackground(Color.decode("#E73331"));
         setOpaque(false);
+        setPreferredSize(new Dimension(300, 280));
         
         // Panel central para la imagen
         JPanel imagenPanel = new JPanel(new MigLayout(
@@ -48,7 +53,7 @@ public class ProductCarousel extends JPanel {
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         imageLabel.setVerticalAlignment(JLabel.CENTER);
         
-        actualizarImagen();
+        actualizarImagen(300 - 80, 280);
         
         imagenPanel.add(imageLabel, "grow");
         
@@ -56,19 +61,33 @@ public class ProductCarousel extends JPanel {
         JButton btnIzquierda = crearBotonNavegacion("<");
         btnIzquierda.addActionListener(e -> {
             currentIndex = (currentIndex - 1 + images.length) % images.length;
-            actualizarImagen();
+            actualizarImagen(getWidth() - 80, getHeight());
         });
         
         // Botón derecho
         JButton btnDerecha = crearBotonNavegacion(">");
         btnDerecha.addActionListener(e -> {
             currentIndex = (currentIndex + 1) % images.length;
-            actualizarImagen();
+            actualizarImagen(getWidth() - 80, getHeight());
         });
         
         add(btnIzquierda, "grow");
         add(imagenPanel, "grow");
         add(btnDerecha, "grow");
+        
+        // Actualizar imagen cuando cambia el tamaño del componente
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if (getWidth() > 0 && getHeight() > 0) {
+                    if (lastWidth != getWidth() || lastHeight != getHeight()) {
+                        lastWidth = getWidth();
+                        lastHeight = getHeight();
+                        actualizarImagen(getWidth() - 80, getHeight());
+                    }
+                }
+            }
+        });
     }
     
     private JButton crearBotonNavegacion(String texto) {
@@ -99,15 +118,11 @@ public class ProductCarousel extends JPanel {
         return boton;
     }
     
-    private void actualizarImagen() {
+    private void actualizarImagen(int imgWidth, int imgHeight) {
         if (images != null && images.length > 0) {
-            // Obtener dimensiones actuales
-            int panelWidth = getWidth();
-            int panelHeight = getHeight();
-            
-            // Calcular tamaño de la imagen (ancho total - 2 botones)
-            int imgWidth = Math.max(100, panelWidth - 44);
-            int imgHeight = panelHeight > 0 ? panelHeight : 280;
+            // Validar dimensiones
+            imgWidth = Math.max(100, imgWidth);
+            imgHeight = Math.max(200, imgHeight);
             
             Image imgEscalada = images[currentIndex].getImage()
                     .getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH);
@@ -128,3 +143,4 @@ public class ProductCarousel extends JPanel {
         super.paintComponent(g);
     }
 }
+

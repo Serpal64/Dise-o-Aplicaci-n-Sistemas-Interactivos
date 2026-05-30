@@ -15,7 +15,7 @@ public class FormCorrect extends JPanel {
     
     private JButton btnVerProductos;
     
-    public FormCorrect() {
+    public FormCorrect(NavigationListener navigator) {
         setBackground(Color.decode("#F5F5F0"));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -52,14 +52,11 @@ public class FormCorrect extends JPanel {
         btnVerProductos.setPreferredSize(new Dimension(140, 35));
         btnVerProductos.setMaximumSize(new Dimension(140, 35));
         btnVerProductos.setAlignmentX(CENTER_ALIGNMENT);
+        btnVerProductos.addActionListener(e -> navigator.goToHome());
         add(btnVerProductos);
         
         add(Box.createVerticalStrut(10));
         
         setPreferredSize(new Dimension(350, 280));
-    }
-    
-    public void setVerProductosListener(ActionListener listener) {
-        btnVerProductos.addActionListener(listener);
     }
 }

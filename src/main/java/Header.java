@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -14,10 +13,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class Header extends JPanel{
     
-    private JFrame parentFrame;
-    
-    public Header(JFrame parentFrame){
-        this.parentFrame = parentFrame;
+    public Header(NavigationListener navigator){
 
         
         // Para cambiar el idioma
@@ -37,7 +33,7 @@ public class Header extends JPanel{
         JMenuItem contact = new JMenuItem();
         language_changer.addComponent(contact, "Contacto");
         contact.addActionListener(e -> {
-            new FormWindow(parentFrame).show();
+            navigator.goToContact();
         });
 
         // Este menú cambia el idioma
@@ -66,6 +62,8 @@ public class Header extends JPanel{
         ImageIcon img_basket = new ImageIcon(Header.class.getResource("images/header/basket.png"));
 
         AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
+        home.addActionListener(e -> navigator.goToHome());
+        
         AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
         AppButton basket = new AppButton(img_basket, img_basket.getIconWidth(), img_basket.getIconHeight());
 
