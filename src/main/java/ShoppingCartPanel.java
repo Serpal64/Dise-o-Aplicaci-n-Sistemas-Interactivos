@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -169,6 +170,43 @@ public class ShoppingCartPanel extends JPanel {
         AppButton boton_comprar = new AppButton("Comprar", "#E73331", "#FFFFFF");
         boton_comprar.setPreferredSize(new Dimension(135, 40));
         boton_comprar.putClientProperty("JButton.buttonType", "roundRect");
+        boton_comprar.addActionListener(e -> {
+
+            cart.buyProducts();
+
+            JDialog dialog = new JDialog();
+            dialog.setTitle("");
+            dialog.setSize(300, 90);
+            dialog.setLocationRelativeTo(this); // Se pone donde está la app principal
+            dialog.setModal(true);              // Hasta que no se cierre se bloquea la app
+            dialog.setResizable(false);
+
+            JPanel panel = new JPanel(new MigLayout(
+                "insets 20, fillx, wrap 1",
+                "[grow, center]",
+                "[][15][]"
+            ));
+            panel.setBackground(Color.decode("#F3EDDF"));
+
+            JLabel mensaje = new JLabel("¡Compra realizada con éxito!");
+            mensaje.setFont(new Font("Fraunces", Font.PLAIN, 16));
+            mensaje.setForeground(Color.decode("#583E35"));
+            mensaje.setHorizontalAlignment(SwingConstants.CENTER);
+
+            AppButton boton_cerrar = new AppButton("Aceptar", "#E73331", "#FFFFFF");
+            boton_cerrar.setPreferredSize(new Dimension(120, 38));
+            boton_cerrar.putClientProperty("JButton.buttonType", "roundRect");
+            boton_cerrar.addActionListener(ev -> dialog.dispose());
+
+            panel.add(mensaje,   "growx");
+            panel.add(boton_cerrar, "align center");
+
+            dialog.setContentPane(panel);
+            dialog.setVisible(true);
+
+            refresh();
+        });
+
         language_manager.addComponent(boton_comprar, "Comprar");
         main_panel.add(boton_comprar, "align center, gaptop 10");
         }
