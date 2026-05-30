@@ -174,6 +174,7 @@ public class ShoppingCartPanel extends JPanel {
 
             cart.buyProducts();
 
+            // Confirmación de compra con ventana emergente
             JDialog dialog = new JDialog();
             dialog.setTitle("");
             dialog.setSize(300, 90);
@@ -188,10 +189,11 @@ public class ShoppingCartPanel extends JPanel {
             ));
             panel.setBackground(Color.decode("#F3EDDF"));
 
-            JLabel mensaje = new JLabel("¡Compra realizada con éxito!");
+            JLabel mensaje = new JLabel("¡Su compra ha sido realizada con éxito!");
             mensaje.setFont(new Font("Fraunces", Font.PLAIN, 16));
             mensaje.setForeground(Color.decode("#583E35"));
             mensaje.setHorizontalAlignment(SwingConstants.CENTER);
+            language_manager.addComponent(mensaje, "ConfirmacionCompra");
 
             AppButton boton_cerrar = new AppButton("Aceptar", "#E73331", "#FFFFFF");
             boton_cerrar.setPreferredSize(new Dimension(120, 38));
