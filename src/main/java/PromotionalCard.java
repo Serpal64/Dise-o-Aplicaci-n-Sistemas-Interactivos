@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
@@ -44,16 +45,17 @@ public class PromotionalCard extends JPanel {
         textoPane.setFont(textoPane.getFont().deriveFont(14f));
         textoPane.setText(texto);
         textoPane.setFocusable(false);
+        textoPane.setMargin(new Insets(5, 5, 5, 5));
         
-        // Centrar y alinear el texto
+        // Centrar el texto
         StyledDocument doc = textoPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         StyleConstants.setBold(center, true);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
         
-        add(imagenLabel, "aligny top, gapright 10");
-        add(textoPane, "grow");
+        add(imagenLabel, "aligny center, gapright 10");
+        add(textoPane, "grow, aligny center");
     }
     
     @Override

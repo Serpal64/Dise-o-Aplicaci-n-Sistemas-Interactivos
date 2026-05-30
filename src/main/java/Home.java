@@ -16,7 +16,7 @@ public class Home {
         JPanel main_panel = new JPanel(bl);
         main_panel.setBackground(Color.decode("#F3EDDF"));
 
-        Header header = new Header();
+        Header header = new Header(jf);
         main_panel.add(header, BorderLayout.NORTH);
 
         HomeContent homeContent = new HomeContent();

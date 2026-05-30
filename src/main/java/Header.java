@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -13,7 +14,10 @@ import net.miginfocom.swing.MigLayout;
 
 public class Header extends JPanel{
     
-    public Header(){
+    private JFrame parentFrame;
+    
+    public Header(JFrame parentFrame){
+        this.parentFrame = parentFrame;
 
         
         // Para cambiar el idioma
@@ -32,6 +36,9 @@ public class Header extends JPanel{
 
         JMenuItem contact = new JMenuItem();
         language_changer.addComponent(contact, "Contacto");
+        contact.addActionListener(e -> {
+            new FormWindow(parentFrame).show();
+        });
 
         // Este menú cambia el idioma
         JMenuItem language = new JMenuItem();
