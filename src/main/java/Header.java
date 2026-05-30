@@ -1,7 +1,7 @@
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,11 +13,16 @@ import net.miginfocom.swing.MigLayout;
 
 public class Header extends JPanel{
     
-    public Header(NavigationListener navigator){
+    private final CardLayout cardLayout;
+    private final JPanel content;
 
-        
+    public Header(CardLayout cardLayout, JPanel content){
+
+        this.cardLayout = cardLayout;
+        this.content = content;
+
         // Para cambiar el idioma
-        ChangeLanguage language_changer = new ChangeLanguage();
+        ChangeLanguage language_changer = ChangeLanguage.getInstance();
 
         // El navbar de arriba
         setLayout(new MigLayout("insets 20 20 5 15, fillx, gap 0", "[][grow][]", "[center]"));
@@ -30,14 +35,11 @@ public class Header extends JPanel{
 
         JPopupMenu popupMenu = new JPopupMenu();
 
-        JMenuItem contact = new JMenuItem();
+        JMenuItem contact = new JMenuItem("Contacto");
         language_changer.addComponent(contact, "Contacto");
-        contact.addActionListener(e -> {
-            navigator.goToContact();
-        });
 
         // Este menú cambia el idioma
-        JMenuItem language = new JMenuItem();
+        JMenuItem language = new JMenuItem("Idioma");
         language_changer.addComponent(language, "Idioma");
         language.addActionListener(e -> language_changer.actionPerformed(e));
 
@@ -62,10 +64,14 @@ public class Header extends JPanel{
         ImageIcon img_basket = new ImageIcon(Header.class.getResource("images/header/basket.png"));
 
         AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
-        home.addActionListener(e -> navigator.goToHome());
-        
         AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
+        tomato.addActionListener(e -> {
+            cardLayout.show(content, "productos");
+        });
         AppButton basket = new AppButton(img_basket, img_basket.getIconWidth(), img_basket.getIconHeight());
+        basket.addActionListener(e -> {
+            cardLayout.show(content, "carrito");
+        });
 
         header_right.add(home);
         header_right.add(tomato);
@@ -75,8 +81,6 @@ public class Header extends JPanel{
         add(search,       "growx, gapright 0");   // se estira para ocupar el centro
         add(header_right, "");
 
-        // Para inicializar los idiomas
-        language_changer.actionPerformed(new ActionEvent(basket, 0, null));
     }
 
 }
