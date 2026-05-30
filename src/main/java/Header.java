@@ -37,6 +37,9 @@ public class Header extends JPanel{
 
         JMenuItem contact = new JMenuItem("Contacto");
         language_changer.addComponent(contact, "Contacto");
+        contact.addActionListener(e -> {
+            cardLayout.show(content, "contacto");
+        });
 
         // Este menú cambia el idioma
         JMenuItem language = new JMenuItem("Idioma");
@@ -64,6 +67,9 @@ public class Header extends JPanel{
         ImageIcon img_basket = new ImageIcon(Header.class.getResource("images/header/basket.png"));
 
         AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
+        home.addActionListener(e -> {
+            cardLayout.show(content, "home");
+        });
         AppButton tomato = new AppButton(img_tomato, img_tomato.getIconWidth(), img_tomato.getIconHeight());
         tomato.addActionListener(e -> {
             cardLayout.show(content, "productos");

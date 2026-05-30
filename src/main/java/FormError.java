@@ -1,13 +1,14 @@
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -15,30 +16,51 @@ public class FormError extends JPanel {
     
     private JButton btnReintentar;
     
-    public FormError(String errorMessage, NavigationListener navigator) {
+    public FormError(String errorMessage, CardLayout cardLayout, JPanel content) {
+        
+        ChangeLanguage language_changer = ChangeLanguage.getInstance();
+        
         setBackground(Color.decode("#F5F5F0"));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(30, 30, 30, 30));
         
         add(Box.createVerticalStrut(10));
         
-        // Título
-        JLabel lblTitulo = new JLabel("<html><center>ERROR AL ENVIAR<br>EL FORMULARIO</center></html>");
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 18));
-        lblTitulo.setForeground(Color.decode("#E73331"));
-        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setAlignmentX(CENTER_ALIGNMENT);
-        add(lblTitulo);
+        // Título - en dos líneas
+        JLabel lblTitulo1 = new JLabel("ERROR AL ENVIAR");
+        lblTitulo1.setFont(new Font("Arial", Font.BOLD, 18));
+        lblTitulo1.setForeground(Color.decode("#E73331"));
+        lblTitulo1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulo1.setAlignmentX(CENTER_ALIGNMENT);
+        language_changer.addComponent(lblTitulo1, "ErrorAlEnviarLinea1");
+        add(lblTitulo1);
+        
+        JLabel lblTitulo2 = new JLabel("EL FORMULARIO");
+        lblTitulo2.setFont(new Font("Arial", Font.BOLD, 18));
+        lblTitulo2.setForeground(Color.decode("#E73331"));
+        lblTitulo2.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulo2.setAlignmentX(CENTER_ALIGNMENT);
+        language_changer.addComponent(lblTitulo2, "ErrorAlEnviarLinea2");
+        add(lblTitulo2);
         
         add(Box.createVerticalStrut(20));
         
-        // Mensaje de error general
-        JLabel lblMensaje = new JLabel("<html><center>Asegúrate de introducir todos los campos obligatorios y de comprobar que tu dirección de correo electrónico sea correcta.</center></html>");
-        lblMensaje.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblMensaje.setForeground(Color.decode("#333333"));
-        lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMensaje.setAlignmentX(CENTER_ALIGNMENT);
-        add(lblMensaje);
+        // Mensaje de error general - usando JTextArea para mejor wrapping
+        JTextArea txtMensaje = new JTextArea("Asegúrate de introducir todos los campos obligatorios y de comprobar que tu dirección de correo electrónico sea correcta.");
+        txtMensaje.setFont(new Font("Arial", Font.PLAIN, 12));
+        txtMensaje.setForeground(Color.decode("#333333"));
+        txtMensaje.setBackground(Color.decode("#F5F5F0"));
+        txtMensaje.setLineWrap(true);
+        txtMensaje.setWrapStyleWord(true);
+        txtMensaje.setEditable(false);
+        txtMensaje.setBorder(null);
+        txtMensaje.setAlignmentX(CENTER_ALIGNMENT);
+        JPanel msgPanel = new JPanel();
+        msgPanel.setBackground(Color.decode("#F5F5F0"));
+        msgPanel.setMaximumSize(new Dimension(310, 60));
+        msgPanel.add(txtMensaje);
+        language_changer.addComponent(txtMensaje, "AsegurateDeIntroducir");
+        add(msgPanel);
         
         add(Box.createVerticalStrut(10));
         
@@ -65,12 +87,13 @@ public class FormError extends JPanel {
         btnReintentar.setPreferredSize(new Dimension(140, 35));
         btnReintentar.setMaximumSize(new Dimension(140, 35));
         btnReintentar.setAlignmentX(CENTER_ALIGNMENT);
-        btnReintentar.addActionListener(e -> navigator.goToContact());
+        language_changer.addComponent(btnReintentar, "Reintentar");
+        btnReintentar.addActionListener(e -> cardLayout.show(content, "contacto"));
         add(btnReintentar);
         
         add(Box.createVerticalStrut(10));
         
-        setPreferredSize(new Dimension(350, 300));
+        setPreferredSize(new Dimension(350, 380));
     }
 }
 

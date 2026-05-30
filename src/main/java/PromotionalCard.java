@@ -21,6 +21,10 @@ public class PromotionalCard extends JPanel {
     private static final int BORDER_RADIUS = 24;
 
     public PromotionalCard(ImageIcon imagen, String texto) {
+        this(imagen, null, texto);
+    }
+    
+    public PromotionalCard(ImageIcon imagen, JTextPane textoPane, String texto) {
         
         setLayout(new MigLayout(
             "insets 15, fillx, filly",
@@ -38,21 +42,23 @@ public class PromotionalCard extends JPanel {
         imagenLabel.setVerticalAlignment(SwingConstants.CENTER);
         
         // Texto promocional
-        JTextPane textoPane = new JTextPane();
-        textoPane.setEditable(false);
-        textoPane.setBackground(Color.decode("#E73331"));
-        textoPane.setForeground(Color.WHITE);
-        textoPane.setFont(textoPane.getFont().deriveFont(14f));
-        textoPane.setText(texto);
-        textoPane.setFocusable(false);
-        textoPane.setMargin(new Insets(5, 5, 5, 5));
-        
-        // Centrar el texto
-        StyledDocument doc = textoPane.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        StyleConstants.setBold(center, true);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        if (textoPane == null) {
+            textoPane = new JTextPane();
+            textoPane.setEditable(false);
+            textoPane.setBackground(Color.decode("#E73331"));
+            textoPane.setForeground(Color.WHITE);
+            textoPane.setFont(textoPane.getFont().deriveFont(14f));
+            textoPane.setText(texto);
+            textoPane.setFocusable(false);
+            textoPane.setMargin(new Insets(5, 5, 5, 5));
+            
+            // Centrar el texto
+            StyledDocument doc = textoPane.getStyledDocument();
+            SimpleAttributeSet center = new SimpleAttributeSet();
+            StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+            StyleConstants.setBold(center, true);
+            doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        }
         
         add(imagenLabel, "aligny center, gapright 10");
         add(textoPane, "grow, aligny center");

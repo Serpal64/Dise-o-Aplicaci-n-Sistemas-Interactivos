@@ -1,10 +1,10 @@
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,10 +25,15 @@ public class ContactForm extends JPanel {
     private JTextField txtDireccion;
     private JTextArea txtMensaje;
     private JButton btnEnviar;
-    private NavigationListener navigator;
+    private CardLayout cardLayout;
+    private JPanel content;
     
-    public ContactForm(NavigationListener navigator) {
-        this.navigator = navigator;
+    public ContactForm(CardLayout cardLayout, JPanel content) {
+        this.cardLayout = cardLayout;
+        this.content = content;
+        
+        ChangeLanguage language_changer = ChangeLanguage.getInstance();
+        
         setBackground(Color.decode("#E73331"));
         setLayout(new MigLayout("insets 20, gap 15", "[grow]", ""));
         setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -37,12 +42,14 @@ public class ContactForm extends JPanel {
         JLabel lblTitulo = new JLabel("Contáctanos");
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
         lblTitulo.setForeground(Color.WHITE);
+        language_changer.addComponent(lblTitulo, "Contactanos");
         add(lblTitulo, "wrap");
         
         // Nombre*
         JLabel lblNombre = new JLabel("Nombre*");
         lblNombre.setFont(new Font("Arial", Font.PLAIN, 12));
         lblNombre.setForeground(Color.WHITE);
+        language_changer.addComponent(lblNombre, "Nombre");
         add(lblNombre, "wrap");
         
         txtNombre = new JTextField(20);
@@ -53,6 +60,7 @@ public class ContactForm extends JPanel {
         JLabel lblApellidos = new JLabel("Apellidos");
         lblApellidos.setFont(new Font("Arial", Font.PLAIN, 12));
         lblApellidos.setForeground(Color.WHITE);
+        language_changer.addComponent(lblApellidos, "Apellidos");
         add(lblApellidos, "wrap");
         
         txtApellidos = new JTextField(20);
@@ -63,6 +71,7 @@ public class ContactForm extends JPanel {
         JLabel lblCorreo = new JLabel("Correo Electrónico*");
         lblCorreo.setFont(new Font("Arial", Font.PLAIN, 12));
         lblCorreo.setForeground(Color.WHITE);
+        language_changer.addComponent(lblCorreo, "CorreoElectronico");
         add(lblCorreo, "wrap");
         
         txtCorreo = new JTextField(20);
@@ -73,6 +82,7 @@ public class ContactForm extends JPanel {
         JLabel lblNegocio = new JLabel("Nombre de negocio");
         lblNegocio.setFont(new Font("Arial", Font.PLAIN, 12));
         lblNegocio.setForeground(Color.WHITE);
+        language_changer.addComponent(lblNegocio, "NombreNegocio");
         add(lblNegocio, "wrap");
         
         txtNegocio = new JTextField(20);
@@ -83,6 +93,7 @@ public class ContactForm extends JPanel {
         JLabel lblDireccion = new JLabel("Dirección de negocio*");
         lblDireccion.setFont(new Font("Arial", Font.PLAIN, 12));
         lblDireccion.setForeground(Color.WHITE);
+        language_changer.addComponent(lblDireccion, "DireccionNegocio");
         add(lblDireccion, "wrap");
         
         txtDireccion = new JTextField(20);
@@ -93,6 +104,7 @@ public class ContactForm extends JPanel {
         JLabel lblMensaje = new JLabel("Mensaje*");
         lblMensaje.setFont(new Font("Arial", Font.PLAIN, 12));
         lblMensaje.setForeground(Color.WHITE);
+        language_changer.addComponent(lblMensaje, "Mensaje");
         add(lblMensaje, "wrap");
         
         txtMensaje = new JTextArea(6, 20);
@@ -111,6 +123,7 @@ public class ContactForm extends JPanel {
         btnEnviar.setFocusPainted(false);
         btnEnviar.setBorderPainted(false);
         btnEnviar.setPreferredSize(new Dimension(150, 35));
+        language_changer.addComponent(btnEnviar, "Enviar");
         btnEnviar.addActionListener(e -> enviarFormulario());
         add(btnEnviar, "width 150!");
         
@@ -161,19 +174,15 @@ public class ContactForm extends JPanel {
         txtMensaje.setText("");
     }
     
-    public void setEnviarListener(ActionListener listener) {
-        btnEnviar.addActionListener(listener);
-    }
-    
     public void enviarFormulario() {
         FormValidator.ValidationResult validation = 
             FormValidator.validateForm(getNombre(), getCorreo(), getDireccion(), getMensaje());
         
         if (validation.isValid) {
             limpiarFormulario();
-            navigator.showFormCorrect();
+            cardLayout.show(content, "formCorrect");
         } else {
-            navigator.showFormError(validation.errorMessage);
+            cardLayout.show(content, "formError");
         }
     }
 }

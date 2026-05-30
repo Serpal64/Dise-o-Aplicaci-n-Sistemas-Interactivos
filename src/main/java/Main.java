@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,60 +12,86 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-
 public class Main {
-    public static void main(String[] args) throws Exception {
+    private static final String WINDOW_TITLE = "Salmorejo Shop";
+    private static final int WINDOW_WIDTH = 390;
+    private static final int WINDOW_HEIGHT = 844;
+    private static final int NUM_PRODUCTS = 3;
+    private static final float PRODUCT_PRICE = 1.75f;
+    private static final Color BG_COLOR = Color.decode("#F3EDDF");
+    private static final Color MENU_BG = Color.decode("#E73331");
+    private static final Color MENU_HOVER = Color.decode("#C42020");
 
+    public static void main(String[] args) throws Exception {
+        setupUI();
+        JFrame frame = createAndShowUI();
+        frame.setVisible(true);
+    }
+
+    private static void setupUI() {
         FlatLightLaf.setup();
         UIManager.put("Button.arc", 20);
-        UIManager.put("MenuItem.background",        Color.decode("#E73331"));
-        UIManager.put("MenuItem.foreground",        Color.WHITE);
-        UIManager.put("MenuItem.selectionBackground", Color.decode("#C42020")); // hover
+        UIManager.put("MenuItem.background", MENU_BG);
+        UIManager.put("MenuItem.foreground", Color.WHITE);
+        UIManager.put("MenuItem.selectionBackground", MENU_HOVER);
         UIManager.put("MenuItem.selectionForeground", Color.WHITE);
-        UIManager.put("MenuItem.font",              new Font("Fraunces", Font.PLAIN, 16));
-        UIManager.put("PopupMenu.background",       Color.decode("#E73331"));
+        UIManager.put("MenuItem.font", new Font("Fraunces", Font.PLAIN, 16));
+        UIManager.put("PopupMenu.background", MENU_BG);
+    }
 
-        JFrame jf = new JFrame("Home");
-        ChangeLanguage language_changer = ChangeLanguage.getInstance();
-
-        BorderLayout bl = new BorderLayout(5, 5);
-
-        // Panel principal de la vista
-        JPanel main_panel = new JPanel(bl);
-        main_panel.setBackground(Color.decode("#F3EDDF"));
-
-        // Panel donde se irán cambiando el contenido porque el header se queda igual
-        CardLayout cardLayout = new CardLayout();
-        JPanel content = new JPanel(cardLayout);
-
-        Header header = new Header(cardLayout, content);
-        main_panel.add(header, BorderLayout.NORTH);
-
-        // Lista con los datos de los productos que vamos a utilizar
-        List<ProductDetails> productos = new ArrayList<>();
-
-        for(int i=1; i<=3; i++){
-            productos.add(new ProductDetails("Producto" + i, new ImageIcon(Main.class.getResource("images/product/Producto" + i + ".png")), "Descripcion" + i, (float)1.75));
-            content.add(new Product(productos.get(i-1), cardLayout, content), "Producto" + i);
-        }
-
-        // Añadimos todas las ventanas al cardLayout y cuando queramos cambiar de ventana hacemos un .show
-        content.add(new Products(3, cardLayout, content, productos), "productos");
-        content.add(ShoppingCartPanel.getInstance(cardLayout, content), "carrito");
+    private static JFrame createAndShowUI() {
+        JFrame frame = new JFrame(WINDOW_TITLE);
+        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        cardLayout.show(content, "productos");
+        JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
+        mainPanel.setBackground(BG_COLOR);
+        
+        CardLayout cardLayout = new CardLayout();
+        JPanel contentPanel = new JPanel(cardLayout);
+        
+        List<ProductDetails> productos = loadProducts();
+        Header header = new Header(cardLayout, contentPanel);
+        mainPanel.add(header, BorderLayout.NORTH);
+        
+        addPages(contentPanel, cardLayout, productos);
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        
+        frame.add(mainPanel);
+        return frame;
+    }
 
-        main_panel.add(content, BorderLayout.CENTER);
+    private static List<ProductDetails> loadProducts() {
+        List<ProductDetails> productos = new ArrayList<>();
+        
+        for (int i = 1; i <= NUM_PRODUCTS; i++) {
+            String resourcePath = "/images/product/Producto" + i + ".png";
+            java.net.URL imageUrl = Main.class.getResource(resourcePath);
+            
+            ImageIcon icon = imageUrl != null ? new ImageIcon(imageUrl) : new ImageIcon();
+            if (imageUrl == null) {
+                System.err.println("Advertencia: No se pudo cargar imagen: " + resourcePath);
+            }
+            
+            productos.add(new ProductDetails("Producto" + i, icon, "Descripcion" + i, PRODUCT_PRICE));
+        }
+        
+        return productos;
+    }
 
-        jf.add(main_panel);
-        jf.setSize(390, 844);
-        jf.setResizable(false);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setVisible(true);    
-
-        // Para inicializar los textos 
-        language_changer.printComponents();
-        language_changer.actionPerformed(new ActionEvent(main_panel, 0, null));
-
+    private static void addPages(JPanel contentPanel, CardLayout cardLayout, List<ProductDetails> productos) {
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            contentPanel.add(new Product(productos.get(i), cardLayout, contentPanel), "Producto" + (i + 1));
+        }
+        
+        contentPanel.add(new HomeContent(), "home");
+        contentPanel.add(new Products(NUM_PRODUCTS, cardLayout, contentPanel, productos), "productos");
+        contentPanel.add(ShoppingCartPanel.getInstance(cardLayout, contentPanel), "carrito");
+        contentPanel.add(new ContactForm(cardLayout, contentPanel), "contacto");
+        contentPanel.add(new FormCorrect(cardLayout, contentPanel), "formCorrect");
+        contentPanel.add(new FormError("", cardLayout, contentPanel), "formError");
+        
+        cardLayout.show(contentPanel, "home");
     }
 }

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class ChangeLanguage implements ActionListener{
@@ -23,8 +24,7 @@ public class ChangeLanguage implements ActionListener{
 
         this.locales = new Locale[]{new Locale("es", "ES"), new Locale("en", "GB")};
         this.components = new LinkedHashMap<>();
-        this.currentLocaleIndex = 1;        // Idioma por defecto en español
-
+        this.currentLocaleIndex = 0;        // Idioma por defecto en español
     }
 
     public void printComponents(){
@@ -58,30 +58,40 @@ public class ChangeLanguage implements ActionListener{
 
     private void applyText(JComponent comp, String key, ResourceBundle bundle_text) {
 
-
         if(comp instanceof JLabel jLabel){
-            jLabel.setText(bundle_text.getString(key));
+            String text = bundle_text.getString(key);
+            // Convertir \n a <br> para HTML
+            if(text.contains("\\n")) {
+                text = text.replace("\\n", "<br>");
+                text = "<html><body style='text-align: center'>" + text + "</body></html>";
+            }
+            jLabel.setText(text);
         }
         else if(comp instanceof JButton jButton) {
             jButton.setText(bundle_text.getString(key));
         }
         else if(comp instanceof JMenuItem jMItem){
             jMItem.setText(bundle_text.getString(key));
-            ImageIcon icon;
-
+            
             if("Idioma".equals(key)){
+                // Actualizar icono según el idioma actual
+                ImageIcon icon;
                 if(currentLocaleIndex == 0)
                     icon = new ImageIcon(Main.class.getResource("images/header_menu/es.png"));
                 else
                     icon = new ImageIcon(Main.class.getResource("images/header_menu/en.png"));
-            }else{
-                icon = new ImageIcon(Main.class.getResource("images/header_menu/contact.png"));
+                jMItem.setIcon(icon);
             }
-
-            jMItem.setIcon(icon);
+            else if("Contacto".equals(key)){
+                ImageIcon icon = new ImageIcon(Main.class.getResource("images/header_menu/contact.png"));
+                jMItem.setIcon(icon);
+            }
         }
         else if(comp instanceof JTextPane jTextPane){
             jTextPane.setText(bundle_text.getString(key));
+        }
+        else if(comp instanceof JTextArea jTextArea){
+            jTextArea.setText(bundle_text.getString(key));
         }
     }
 
