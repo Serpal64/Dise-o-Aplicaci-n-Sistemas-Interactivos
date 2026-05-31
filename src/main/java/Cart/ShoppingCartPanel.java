@@ -24,11 +24,10 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import net.miginfocom.swing.MigLayout;
-
 import Products.ProductDetails;
 import UI.AppButton;
 import UI.ChangeLanguage;
+import net.miginfocom.swing.MigLayout;
 
 public class ShoppingCartPanel extends JPanel {
 
@@ -139,7 +138,7 @@ public class ShoppingCartPanel extends JPanel {
                 ));
                 derecho.setBackground(Color.decode("#F3EDDF"));
 
-                JLabel precio = new JLabel(p.getPrecio() + " €/kg");
+                JLabel precio = new JLabel(String.format("%.2f", p.getPrecio()) + " €/kg");
                 precio.setFont(new Font("Fraunces", Font.PLAIN, 15));
                 precio.setForeground(Color.decode("#583E35"));
 
