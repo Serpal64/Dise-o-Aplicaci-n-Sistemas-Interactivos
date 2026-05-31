@@ -12,21 +12,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 
 public class ContactForm extends JPanel {
     
-    private JTextField txtNombre;
-    private JTextField txtApellidos;
-    private JTextField txtCorreo;
-    private JTextField txtNegocio;
-    private JTextField txtDireccion;
-    private JTextArea txtMensaje;
-    private JButton btnEnviar;
-    private CardLayout cardLayout;
-    private JPanel content;
+    private final JTextField nombre;
+    private final JTextField apellidos;
+    private final JTextField correo;
+    private final JTextField negocio;
+    private final JTextField direccion;
+    private final JTextArea mensaje;
+    private final JButton boton_enviar;
+    private final CardLayout cardLayout;
+    private final JPanel content;
     
     public ContactForm(CardLayout cardLayout, JPanel content) {
         this.cardLayout = cardLayout;
@@ -35,97 +34,96 @@ public class ContactForm extends JPanel {
         ChangeLanguage language_changer = ChangeLanguage.getInstance();
         
         setBackground(Color.decode("#E73331"));
-        setLayout(new MigLayout("insets 20, gap 15", "[grow]", ""));
-        setBorder(new EmptyBorder(20, 20, 20, 20));
+        setLayout(new MigLayout("insets 30, fillx, gapy 15", "[grow]", ""));
         
         // Título
         JLabel lblTitulo = new JLabel("Contáctanos");
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
+        lblTitulo.setFont(new Font("Fraunces", Font.BOLD, 24));
         lblTitulo.setForeground(Color.WHITE);
         language_changer.addComponent(lblTitulo, "Contactanos");
         add(lblTitulo, "wrap");
         
         // Nombre*
         JLabel lblNombre = new JLabel("Nombre*");
-        lblNombre.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblNombre.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblNombre.setForeground(Color.WHITE);
         language_changer.addComponent(lblNombre, "Nombre");
         add(lblNombre, "wrap");
         
-        txtNombre = new JTextField(20);
-        txtNombre.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(txtNombre, "grow, wrap");
+        nombre = new JTextField(20);
+        nombre.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        add(nombre, "grow, wrap");
         
         // Apellidos
         JLabel lblApellidos = new JLabel("Apellidos");
-        lblApellidos.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblApellidos.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblApellidos.setForeground(Color.WHITE);
         language_changer.addComponent(lblApellidos, "Apellidos");
         add(lblApellidos, "wrap");
         
-        txtApellidos = new JTextField(20);
-        txtApellidos.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(txtApellidos, "grow, wrap");
+        apellidos = new JTextField(20);
+        apellidos.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        add(apellidos, "grow, wrap");
         
         // Correo Electrónico*
         JLabel lblCorreo = new JLabel("Correo Electrónico*");
-        lblCorreo.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblCorreo.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblCorreo.setForeground(Color.WHITE);
         language_changer.addComponent(lblCorreo, "CorreoElectronico");
         add(lblCorreo, "wrap");
         
-        txtCorreo = new JTextField(20);
-        txtCorreo.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(txtCorreo, "grow, wrap");
+        correo = new JTextField(20);
+        correo.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        add(correo, "grow, wrap");
         
         // Nombre de negocio
         JLabel lblNegocio = new JLabel("Nombre de negocio");
-        lblNegocio.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblNegocio.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblNegocio.setForeground(Color.WHITE);
         language_changer.addComponent(lblNegocio, "NombreNegocio");
         add(lblNegocio, "wrap");
         
-        txtNegocio = new JTextField(20);
-        txtNegocio.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(txtNegocio, "grow, wrap");
+        negocio = new JTextField(20);
+        negocio.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        add(negocio, "grow, wrap");
         
         // Dirección de negocio*
         JLabel lblDireccion = new JLabel("Dirección de negocio*");
-        lblDireccion.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblDireccion.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblDireccion.setForeground(Color.WHITE);
         language_changer.addComponent(lblDireccion, "DireccionNegocio");
         add(lblDireccion, "wrap");
         
-        txtDireccion = new JTextField(20);
-        txtDireccion.setFont(new Font("Arial", Font.PLAIN, 12));
-        add(txtDireccion, "grow, wrap");
+        direccion = new JTextField(20);
+        direccion.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        add(direccion, "grow, wrap");
         
         // Mensaje*
         JLabel lblMensaje = new JLabel("Mensaje*");
-        lblMensaje.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblMensaje.setFont(new Font("Fraunces", Font.PLAIN, 12));
         lblMensaje.setForeground(Color.WHITE);
         language_changer.addComponent(lblMensaje, "Mensaje");
         add(lblMensaje, "wrap");
         
-        txtMensaje = new JTextArea(6, 20);
-        txtMensaje.setFont(new Font("Arial", Font.PLAIN, 12));
-        txtMensaje.setLineWrap(true);
-        txtMensaje.setWrapStyleWord(true);
+        mensaje = new JTextArea(6, 20);
+        mensaje.setFont(new Font("Fraunces", Font.PLAIN, 12));
+        mensaje.setLineWrap(true);
+        mensaje.setWrapStyleWord(true);
         
-        JScrollPane scrollPane = new JScrollPane(txtMensaje);
+        JScrollPane scrollPane = new JScrollPane(mensaje);
         add(scrollPane, "grow, wrap");
         
         // Botón Enviar
-        btnEnviar = new JButton("ENVIAR");
-        btnEnviar.setBackground(Color.decode("#4A4A4A"));
-        btnEnviar.setForeground(Color.WHITE);
-        btnEnviar.setFont(new Font("Arial", Font.BOLD, 12));
-        btnEnviar.setFocusPainted(false);
-        btnEnviar.setBorderPainted(false);
-        btnEnviar.setPreferredSize(new Dimension(150, 35));
-        language_changer.addComponent(btnEnviar, "Enviar");
-        btnEnviar.addActionListener(e -> enviarFormulario());
-        add(btnEnviar, "width 150!");
+        boton_enviar = new JButton("ENVIAR");
+        boton_enviar.setBackground(Color.decode("#4A4A4A"));
+        boton_enviar.setForeground(Color.WHITE);
+        boton_enviar.setFont(new Font("Fraunces", Font.BOLD, 12));
+        boton_enviar.setFocusPainted(false);
+        boton_enviar.setBorderPainted(false);
+        boton_enviar.setPreferredSize(new Dimension(150, 35));
+        language_changer.addComponent(boton_enviar, "Enviar");
+        boton_enviar.addActionListener(e -> enviarFormulario());
+        add(boton_enviar, "align center, gapy 20");
         
         setPreferredSize(new Dimension(350, 600));
     }
@@ -142,36 +140,36 @@ public class ContactForm extends JPanel {
     }
     
     public String getNombre() {
-        return txtNombre.getText();
+        return nombre.getText();
     }
     
     public String getApellidos() {
-        return txtApellidos.getText();
+        return apellidos.getText();
     }
     
     public String getCorreo() {
-        return txtCorreo.getText();
+        return correo.getText();
     }
     
     public String getNegocio() {
-        return txtNegocio.getText();
+        return negocio.getText();
     }
     
     public String getDireccion() {
-        return txtDireccion.getText();
+        return direccion.getText();
     }
     
     public String getMensaje() {
-        return txtMensaje.getText();
+        return mensaje.getText();
     }
     
     public void limpiarFormulario() {
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtCorreo.setText("");
-        txtNegocio.setText("");
-        txtDireccion.setText("");
-        txtMensaje.setText("");
+        nombre.setText("");
+        apellidos.setText("");
+        correo.setText("");
+        negocio.setText("");
+        direccion.setText("");
+        mensaje.setText("");
     }
     
     public void enviarFormulario() {

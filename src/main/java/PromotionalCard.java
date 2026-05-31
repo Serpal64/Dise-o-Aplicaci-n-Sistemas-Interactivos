@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
@@ -27,8 +26,8 @@ public class PromotionalCard extends JPanel {
     public PromotionalCard(ImageIcon imagen, JTextPane textoPane, String texto) {
         
         setLayout(new MigLayout(
-            "insets 15, fillx, filly",
-            "[100!][grow]",
+            "insets 20, fillx",
+            "30[]10[grow]10",
             "[grow]"
         ));
         
@@ -50,7 +49,6 @@ public class PromotionalCard extends JPanel {
             textoPane.setFont(textoPane.getFont().deriveFont(14f));
             textoPane.setText(texto);
             textoPane.setFocusable(false);
-            textoPane.setMargin(new Insets(5, 5, 5, 5));
             
             // Centrar el texto
             StyledDocument doc = textoPane.getStyledDocument();
@@ -60,8 +58,8 @@ public class PromotionalCard extends JPanel {
             doc.setParagraphAttributes(0, doc.getLength(), center, false);
         }
         
-        add(imagenLabel, "aligny center, gapright 10");
-        add(textoPane, "grow, aligny center");
+        add(imagenLabel, "aligny center");
+        add(textoPane, "grow, align center, gapy 15");
     }
     
     @Override

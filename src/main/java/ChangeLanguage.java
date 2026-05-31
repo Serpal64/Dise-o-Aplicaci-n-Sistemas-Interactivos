@@ -24,15 +24,7 @@ public class ChangeLanguage implements ActionListener{
 
         this.locales = new Locale[]{new Locale("es", "ES"), new Locale("en", "GB")};
         this.components = new LinkedHashMap<>();
-        this.currentLocaleIndex = 0;        // Idioma por defecto en español
-    }
-
-    public void printComponents(){
-
-        components.forEach((comp, key) -> {System.out.println(key);});
-
-        System.out.println();
-
+        this.currentLocaleIndex = 1;        // Idioma por defecto en español
     }
 
     public static ChangeLanguage getInstance() {
@@ -59,13 +51,7 @@ public class ChangeLanguage implements ActionListener{
     private void applyText(JComponent comp, String key, ResourceBundle bundle_text) {
 
         if(comp instanceof JLabel jLabel){
-            String text = bundle_text.getString(key);
-            // Convertir \n a <br> para HTML
-            if(text.contains("\\n")) {
-                text = text.replace("\\n", "<br>");
-                text = "<html><body style='text-align: center'>" + text + "</body></html>";
-            }
-            jLabel.setText(text);
+            jLabel.setText(bundle_text.getString(key));
         }
         else if(comp instanceof JButton jButton) {
             jButton.setText(bundle_text.getString(key));

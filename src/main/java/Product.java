@@ -115,7 +115,7 @@ public class Product extends JPanel{
         ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
         spinner.setPreferredSize(new Dimension(70, 35));
 
-        JLabel precio_label = new JLabel(product.getPrecio() + " €/kg");
+        JLabel precio_label = new JLabel(String.format("%.2f", product.getPrecio()) + " €/kg");
         precio_label.setForeground(Color.decode("#583E35"));
         precio_label.setBackground(Color.decode("#F3EDDF"));
         precio_label.setHorizontalTextPosition(SwingConstants.CENTER);

@@ -144,7 +144,6 @@ public class ShoppingCartPanel extends JPanel {
                 spinner.addChangeListener(e -> {
                     cart.addProduct(p, (int)spinner.getValue());
                     refresh();
-                    language_manager.printComponents();
                 });
 
                 derecho.add(precio, "");

@@ -17,7 +17,6 @@ public class Main {
     private static final int WINDOW_WIDTH = 390;
     private static final int WINDOW_HEIGHT = 844;
     private static final int NUM_PRODUCTS = 3;
-    private static final float PRODUCT_PRICE = 1.75f;
     private static final Color BG_COLOR = Color.decode("#F3EDDF");
     private static final Color MENU_BG = Color.decode("#E73331");
     private static final Color MENU_HOVER = Color.decode("#C42020");
@@ -26,6 +25,7 @@ public class Main {
         setupUI();
         JFrame frame = createAndShowUI();
         frame.setVisible(true);
+        ChangeLanguage.getInstance().actionPerformed(null);
     }
 
     private static void setupUI() {
@@ -45,7 +45,7 @@ public class Main {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
+        JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(BG_COLOR);
         
         CardLayout cardLayout = new CardLayout();
@@ -74,7 +74,7 @@ public class Main {
                 System.err.println("Advertencia: No se pudo cargar imagen: " + resourcePath);
             }
             
-            productos.add(new ProductDetails("Producto" + i, icon, "Descripcion" + i, PRODUCT_PRICE));
+            productos.add(new ProductDetails("Producto" + i, icon, "Descripcion" + i, (float)(Math.random() * 2.5) + 1));
         }
         
         return productos;

@@ -6,9 +6,12 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -23,9 +26,9 @@ public class HomeContent extends JPanel {
         
         // Panel principal con contenido
         JPanel mainContent = new JPanel(new MigLayout(
-            "insets 20, gap 15, fillx, wrap 1",
+            "insets 0, gapy 15, wrap 1",
             "[grow]",
-            "[]15[]15[]15[]20[]"
+            "20[]15[]20[]35[]5[]20[]"
         ));
         mainContent.setBackground(Color.decode("#F3EDDF"));
         
@@ -39,46 +42,46 @@ public class HomeContent extends JPanel {
         mainContent.add(titulo, "grow");
         
         // Subtítulo "LOS MEJORES TOMATES DE TODA LA CIUDAD"
-        JLabel subtitulo = new JLabel("LOS MEJORES TOMATES DE TODA LA CIUDAD");
+        JTextPane subtitulo = new JTextPane();
         subtitulo.setFont(new Font("Fraunces", Font.BOLD, 14));
         subtitulo.setForeground(Color.decode("#679A3C"));
-        subtitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        subtitulo.setEditable(false);
+        subtitulo.setSize(290, 50);
+        subtitulo.setBackground(Color.decode("#F3EDDF"));
+
+        // Centrar el texto como en el word
+        StyledDocument doc = subtitulo.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
         language_changer.addComponent(subtitulo, "MejoresTomates");
         
         mainContent.add(subtitulo, "grow");
         
         // Tarjeta promocional
-        try {
-            ChangeLanguage language_changer_promo = ChangeLanguage.getInstance();
-            java.net.URL imageUrl = HomeContent.class.getResource("/images/home/huerto.png");
-            ImageIcon imgHuerto = (imageUrl != null) ? new ImageIcon(imageUrl) : new ImageIcon();
-            
-            JTextPane textoPromoPane = new JTextPane();
-            textoPromoPane.setEditable(false);
-            textoPromoPane.setBackground(Color.decode("#E73331"));
-            textoPromoPane.setForeground(Color.WHITE);
-            textoPromoPane.setFont(textoPromoPane.getFont().deriveFont(14f));
-            textoPromoPane.setText("Tenemos los huertos\nmás ecológicos y sin\nutilizar pesticidas. ¿a\nqué esperas?");
-            textoPromoPane.setFocusable(false);
-            textoPromoPane.setMargin(new java.awt.Insets(5, 5, 5, 5));
-            
-            language_changer_promo.addComponent(textoPromoPane, "TextoPromocion");
-            
-            // Centrar el texto
-            javax.swing.text.StyledDocument doc = textoPromoPane.getStyledDocument();
-            javax.swing.text.SimpleAttributeSet center = new javax.swing.text.SimpleAttributeSet();
-            javax.swing.text.StyleConstants.setAlignment(center, javax.swing.text.StyleConstants.ALIGN_CENTER);
-            javax.swing.text.StyleConstants.setBold(center, true);
-            doc.setParagraphAttributes(0, doc.getLength(), center, false);
-            
-            PromotionalCard tarjetaPromo = new PromotionalCard(imgHuerto, textoPromoPane, "");
-            mainContent.add(tarjetaPromo, "grow, h 204!");
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            // Si no existe la imagen, crear un placeholder
-            JPanel placeholderPromo = new JPanel();
-            placeholderPromo.setBackground(Color.decode("#E73331"));
-            mainContent.add(placeholderPromo, "grow, h 204!");
-        }
+        ChangeLanguage language_changer_promo = ChangeLanguage.getInstance();
+        java.net.URL imageUrl = HomeContent.class.getResource("/images/home/huerto.png");
+        ImageIcon imgHuerto = (imageUrl != null) ? new ImageIcon(imageUrl) : new ImageIcon();
+        
+        JTextPane textoPromoPane = new JTextPane();
+        textoPromoPane.setEditable(false);
+        textoPromoPane.setBackground(Color.decode("#E73331"));
+        textoPromoPane.setForeground(Color.WHITE);
+        textoPromoPane.setFont(new Font("Fraunces", Font.PLAIN, 16));
+        textoPromoPane.setText("Tenemos los huertos\nmás ecológicos y sin\nutilizar pesticidas. ¿a\nqué esperas?");
+        textoPromoPane.setFocusable(false);
+        
+        language_changer_promo.addComponent(textoPromoPane, "TextoPromocion");
+        
+        // Centrar el texto
+        javax.swing.text.StyledDocument doc2 = textoPromoPane.getStyledDocument();
+        javax.swing.text.StyleConstants.setBold(center, true);
+        doc2.setParagraphAttributes(0, doc.getLength(), center, false);
+        
+        PromotionalCard tarjetaPromo = new PromotionalCard(imgHuerto, textoPromoPane, "");
+        mainContent.add(tarjetaPromo, "growx, gapright 10, gapleft 10");
+
         
         // Sección "Nuestros mejores productos"
         JLabel seccionProductos = new JLabel("Nuestros mejores productos");
@@ -88,35 +91,25 @@ public class HomeContent extends JPanel {
         language_changer.addComponent(seccionProductos, "NuestrosMejoresProductos");
         
         // Separador visual
-        JPanel separador = new JPanel();
-        separador.setBackground(Color.decode("#E73331"));
+        JSeparator separador = new JSeparator();
+        separador.setBorder(BorderFactory.createLineBorder(Color.decode("#E73331"), 2));
+        separador.setForeground(Color.decode("#E73331"));
         
-        mainContent.add(seccionProductos, "grow");
-        mainContent.add(separador, "grow, h 2!");
+        mainContent.add(seccionProductos, "grow, align left");
+        mainContent.add(separador, "grow, align center");
         
         // Carrusel de productos
-        try {
-            ImageIcon[] imagenes = new ImageIcon[]{
-                new ImageIcon(HomeContent.class.getResource("/images/home/tomate1.png")),
-                new ImageIcon(HomeContent.class.getResource("/images/home/tomate2.png")),
-                new ImageIcon(HomeContent.class.getResource("/images/home/tomate3.png")),
-                new ImageIcon(HomeContent.class.getResource("/images/home/tomate4.png"))
-            };
-            ProductCarousel carrusel = new ProductCarousel(imagenes);
-            mainContent.add(carrusel, "grow, h 280!");
-        } catch (Exception e) {
-            // Si no existen las imágenes, crear un placeholder
-            JPanel placeholderCarrusel = new JPanel();
-            placeholderCarrusel.setBackground(Color.decode("#E73331"));
-            mainContent.add(placeholderCarrusel, "grow, h 280!");
-        }
+
+        ImageIcon[] imagenes = new ImageIcon[]{
+            new ImageIcon(HomeContent.class.getResource("/images/home/tomate1.png")),
+            new ImageIcon(HomeContent.class.getResource("/images/home/tomate2.png")),
+            new ImageIcon(HomeContent.class.getResource("/images/home/tomate3.png")),
+            new ImageIcon(HomeContent.class.getResource("/images/home/tomate4.png"))
+        };
+        ProductCarousel carrusel = new ProductCarousel(imagenes);
+        mainContent.add(carrusel, "grow");
         
-        // ScrollPane para contenido que no cabe
-        JScrollPane scroll = new JScrollPane(mainContent);
-        scroll.setBorder(BorderFactory.createEmptyBorder());
-        scroll.getVerticalScrollBar().setUnitIncrement(10);
-        scroll.setAutoscrolls(true);
-        
-        add(scroll, BorderLayout.CENTER);
+        add(mainContent, BorderLayout.CENTER);
     }
+
 }
