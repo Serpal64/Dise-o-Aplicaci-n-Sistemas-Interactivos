@@ -2,6 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +16,15 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import UI.ChangeLanguage;
-import UI.Header;
-import Products.Product;
-import Products.ProductDetails;
-import Products.Products;
 import Cart.ShoppingCartPanel;
 import Form.ContactForm;
 import Form.FormCorrect;
 import Form.FormError;
+import Products.Product;
+import Products.ProductDetails;
+import Products.Products;
+import UI.ChangeLanguage;
+import UI.Header;
 
 public class Main {
     private static final String WINDOW_TITLE = "Salmorejo Shop";
@@ -39,6 +43,17 @@ public class Main {
     }
 
     private static void setupUI() {
+
+        InputStream is = Main.class.getResourceAsStream("fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf");
+
+        Font customFont;
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, is);
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(customFont);
+        } catch (FontFormatException | IOException e) {
+            System.out.println(e);
+        }
+
         FlatLightLaf.setup();
         UIManager.put("Button.arc", 20);
         UIManager.put("MenuItem.background", MENU_BG);
