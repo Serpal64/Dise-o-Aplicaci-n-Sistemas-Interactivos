@@ -1,3 +1,5 @@
+package Products;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -16,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
+
+import UI.ChangeLanguage;
+import UI.RoundedPanel;
 
 public class Products extends JPanel{
 

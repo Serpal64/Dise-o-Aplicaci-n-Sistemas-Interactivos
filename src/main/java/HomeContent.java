@@ -15,6 +15,9 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 
+import UI.ChangeLanguage;
+import UI.PromotionalCard;
+
 public class HomeContent extends JPanel {
     
     public HomeContent() {

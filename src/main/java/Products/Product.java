@@ -1,3 +1,5 @@
+package Products;
+
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -20,6 +22,11 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
+
+import Cart.ShoppingCart;
+import Cart.ShoppingCartPanel;
+import UI.AppButton;
+import UI.ChangeLanguage;
 
 public class Product extends JPanel{
 

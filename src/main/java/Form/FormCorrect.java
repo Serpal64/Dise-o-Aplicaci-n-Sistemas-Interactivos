@@ -1,3 +1,5 @@
+package Form;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +13,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
+
+import UI.AppButton;
+import UI.ChangeLanguage;
 
 public class FormCorrect extends JPanel {
     

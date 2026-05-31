@@ -1,3 +1,5 @@
+package UI;
+
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -10,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import net.miginfocom.swing.MigLayout;
+
+import UI.ChangeLanguage;
+import UI.AppButton;
 
 public class Header extends JPanel{
     
@@ -30,7 +35,7 @@ public class Header extends JPanel{
         setBackground(Color.decode("#E73331"));
 
         // Botón menú desplegable
-        ImageIcon img_menu = new ImageIcon(Header.class.getResource("images/header/menu.png"));
+        ImageIcon img_menu = new ImageIcon(Header.class.getResource("/images/header/menu.png"));
         AppButton menu = new AppButton(img_menu, img_menu.getIconWidth(), img_menu.getIconHeight());
 
         JPopupMenu popupMenu = new JPopupMenu();
@@ -55,16 +60,16 @@ public class Header extends JPanel{
         });
 
         // Etiqueta de buscador (meramente estético)
-        ImageIcon img_search = new ImageIcon(Header.class.getResource("images/header/search_bar.png"));
+        ImageIcon img_search = new ImageIcon(Header.class.getResource("/images/header/search_bar.png"));
         JLabel search = new JLabel(img_search);
 
         // Panel derecho con icono home, productos y carrito
         JPanel header_right = new JPanel(new MigLayout("insets 0, gap 5", "[][][]", "[center]"));
         header_right.setBackground(Color.decode("#E73331"));
 
-        ImageIcon img_home   = new ImageIcon(Header.class.getResource("images/header/home.png"));
-        ImageIcon img_tomato = new ImageIcon(Header.class.getResource("images/header/tomato.png"));
-        ImageIcon img_basket = new ImageIcon(Header.class.getResource("images/header/basket.png"));
+        ImageIcon img_home   = new ImageIcon(Header.class.getResource("/images/header/home.png"));
+        ImageIcon img_tomato = new ImageIcon(Header.class.getResource("/images/header/tomato.png"));
+        ImageIcon img_basket = new ImageIcon(Header.class.getResource("/images/header/basket.png"));
 
         AppButton home   = new AppButton(img_home,   img_home.getIconWidth(),   img_home.getIconHeight());
         home.addActionListener(e -> {

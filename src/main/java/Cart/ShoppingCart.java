@@ -1,5 +1,9 @@
+package Cart;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import Products.ProductDetails;
 
 public class ShoppingCart {
     

@@ -1,3 +1,5 @@
+package Form;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
+
+import UI.ChangeLanguage;
 
 public class ContactForm extends JPanel {
     

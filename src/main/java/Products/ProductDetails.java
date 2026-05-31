@@ -1,3 +1,5 @@
+package Products;
+
 import javax.swing.ImageIcon;
 
 public class ProductDetails {

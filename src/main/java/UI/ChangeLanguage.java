@@ -1,3 +1,5 @@
+package UI;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
@@ -63,13 +65,13 @@ public class ChangeLanguage implements ActionListener{
                 // Actualizar icono según el idioma actual
                 ImageIcon icon;
                 if(currentLocaleIndex == 0)
-                    icon = new ImageIcon(Main.class.getResource("images/header_menu/es.png"));
+                    icon = new ImageIcon(ChangeLanguage.class.getResource("/images/header_menu/es.png"));
                 else
-                    icon = new ImageIcon(Main.class.getResource("images/header_menu/en.png"));
+                    icon = new ImageIcon(ChangeLanguage.class.getResource("/images/header_menu/en.png"));
                 jMItem.setIcon(icon);
             }
             else if("Contacto".equals(key)){
-                ImageIcon icon = new ImageIcon(Main.class.getResource("images/header_menu/contact.png"));
+                ImageIcon icon = new ImageIcon(ChangeLanguage.class.getResource("/images/header_menu/contact.png"));
                 jMItem.setIcon(icon);
             }
         }

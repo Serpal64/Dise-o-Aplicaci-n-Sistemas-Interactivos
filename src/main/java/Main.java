@@ -12,6 +12,16 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import UI.ChangeLanguage;
+import UI.Header;
+import Products.Product;
+import Products.ProductDetails;
+import Products.Products;
+import Cart.ShoppingCartPanel;
+import Form.ContactForm;
+import Form.FormCorrect;
+import Form.FormError;
+
 public class Main {
     private static final String WINDOW_TITLE = "Salmorejo Shop";
     private static final int WINDOW_WIDTH = 390;
